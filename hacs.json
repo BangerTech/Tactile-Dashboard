@@ -1,0 +1,7 @@
+{
+  "name": "Tactile Dashboard",
+  "render_readme": true,
+  "domains": ["lovelace"],
+  "iot_class": "Local Push"
+}
+
