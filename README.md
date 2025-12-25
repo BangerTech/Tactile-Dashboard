@@ -33,6 +33,9 @@ Tactile Dashboard ist eine Sammlung von Custom Cards für Home Assistant, die ei
 - ⚡ **Interaktiv**: Direkte Bedienung durch Rotation und Gesten
 - 🎯 **Einfach zu verwenden**: Einfache YAML-Konfiguration
 - 🔧 **HACS-kompatibel**: Einfache Installation über HACS
+- 🎛️ **3 Custom Cards**: Thermostat, Button und Shutter-Steuerung
+- 👁️ **Editor mit Vorschau**: Live-Vorschau beim Konfigurieren
+- 🎨 **Anpassbar**: Farben, Icons und Namen konfigurierbar
 
 ---
 
@@ -56,7 +59,7 @@ Tactile Dashboard ist eine Sammlung von Custom Cards für Home Assistant, die ei
 6. Wähle die Version aus und klicke auf **"Installieren"**
 7. Starte Home Assistant neu
 
-Nach der Installation über HACS werden die Custom Cards automatisch unter `/hacsfiles/Tactile-Dashboard/` bereitgestellt.
+Nach der Installation über HACS werden die Custom Cards automatisch unter `/hacsfiles/Tactile-Dashboard/custom-components/` bereitgestellt.
 
 ### Option 2: Manuelle Installation
 
@@ -80,7 +83,13 @@ Die Ressourcen werden automatisch registriert. Du musst sie nur in deinem Dashbo
 4. Folgende Ressourcen hinzufügen:
    - **URL:** `/local/custom-components/tactile-thermostat.js`  
      **Typ:** `JavaScript-Modul`
+   - **URL:** `/local/custom-components/tactile-button.js`  
+     **Typ:** `JavaScript-Modul`
+   - **URL:** `/local/custom-components/tactile-shutter.js`  
+     **Typ:** `JavaScript-Modul`
 5. Home Assistant neu starten, damit die Custom Cards geladen werden
+
+> **Hinweis:** Du musst nur die Karten hinzufügen, die du auch tatsächlich verwenden möchtest.
 
 ---
 
@@ -89,6 +98,8 @@ Die Ressourcen werden automatisch registriert. Du musst sie nur in deinem Dashbo
 ### Tactile Thermostat Card
 
 Ein interaktiver Thermostat mit rotierbarem Bedienelement. Perfekt für die Steuerung von Klimageräten.
+
+![Tactile Thermostat Card](images/cards/tactile-thermostat.png)
 
 **Beispiel-Konfiguration:**
 
@@ -116,13 +127,97 @@ name: Wohnzimmer
 
 ---
 
+### Tactile Button Card
+
+Ein futuristischer Button mit Icon-Auswahl und Farbanpassung. Perfekt für Lichter, Schalter und andere binäre Entities.
+
+![Tactile Button Card](images/cards/tactile-button.png)
+
+**Beispiel-Konfiguration:**
+
+```yaml
+type: custom:tactile-button-card
+entity: light.wohnzimmer
+```
+
+**Erweiterte Konfiguration:**
+
+```yaml
+type: custom:tactile-button-card
+entity: light.wohnzimmer
+name: Wohnzimmer Licht
+icon: lightbulb
+color: "#ffd700"
+```
+
+**Verfügbare Parameter:**
+
+- `entity` (erforderlich): Die Entity-ID (z.B. `light.wohnzimmer`, `switch.example`)
+- `name` (optional): Ein benutzerdefinierter Name für die Card
+- `icon` (optional): Icon-Typ (`power`, `lightbulb`, `menu`) - Standard: `power`
+- `color` (optional): Farbe als Hex-Code (z.B. `#fb923c`) - Standard: `#fb923c`
+
+**Unterstützte Entities:**
+
+- `light.*` - Alle Light-Entities
+- `switch.*` - Alle Switch-Entities
+- `fan.*` - Alle Fan-Entities
+- Und alle anderen binären Entities
+
+---
+
+### Tactile Shutter Card
+
+Eine taktile Steuerung für Jalousien, Rollläden und andere Cover-Entities mit Slider und Steuerungsbuttons.
+
+![Tactile Shutter Card](images/cards/tactile-shutter.png)
+
+**Beispiel-Konfiguration:**
+
+```yaml
+type: custom:tactile-shutter-card
+entity: cover.wohnzimmer
+```
+
+**Erweiterte Konfiguration:**
+
+```yaml
+type: custom:tactile-shutter-card
+entity: cover.wohnzimmer
+name: Wohnzimmer Jalousie
+color: "#fb923c"
+```
+
+**Verfügbare Parameter:**
+
+- `entity` (erforderlich): Die Entity-ID des Cover-Geräts (z.B. `cover.wohnzimmer`)
+- `name` (optional): Ein benutzerdefinierter Name für die Card
+- `color` (optional): Farbe als Hex-Code (z.B. `#fb923c`) - Standard: `#fb923c`
+
+**Unterstützte Entities:**
+
+- `cover.*` - Alle Home Assistant Cover-Entities
+
+**Funktionen:**
+
+- **Slider**: Direkte Positionseinstellung durch Ziehen
+- **Up-Button**: Öffnet vollständig (100%)
+- **Stop-Button**: Stoppt die Bewegung
+- **Down-Button**: Schließt vollständig (0%)
+
+---
+
 ## Projektstruktur
 
 ```
 Tactile-Dashboard/
 ├── www/                         # Statische Dateien für Home Assistant
 │   └── custom-components/        # Kompilierte Custom Cards
-│       └── tactile-thermostat.js # Tactile Thermostat Card
+│       ├── tactile-thermostat.js # Tactile Thermostat Card
+│       ├── tactile-button.js     # Tactile Button Card
+│       └── tactile-shutter.js    # Tactile Shutter Card
+├── images/                       # Bilder für die Dokumentation
+│   └── cards/                    # Screenshots der einzelnen Cards
 ├── .github/                      # GitHub Workflows und Templates
 │   └── workflows/                # CI/CD Workflows
 ├── hacs.json                     # HACS-Konfiguration

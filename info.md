@@ -18,6 +18,8 @@ Ein modernes, taktiles Dashboard für Home Assistant mit futuristischen Custom C
 ## Verfügbare Cards
 
 - `tactile-thermostat-card` - Interaktiver Thermostat mit rotierbarem Bedienelement
+- `tactile-button-card` - Futuristischer Button mit Icon-Auswahl
+- `tactile-shutter-card` - Shutter/Cover-Steuerung mit Slider
 
 ## Verwendung
 
